@@ -1,0 +1,31 @@
+npm doesn't have full form
+npm handles packages , 
+npm is the standard repository for all the packages
+
+package.json is the congiguration for npm
+
+
+Bundler : example webpack, vite, parcel
+bundler : mailnly bundles your app, it packages your app so that is is shipped to production.
+
+
+there are 2 types of dependencies we can install\
+1 ) dev dependncy : it is required for developemnt phase
+2 ) normal dependency:  it is used in production also
+
+^ : carot
+~ : tilda
+
+what is the diff between package.json and package-lock.json??
+ans):  package.json : it is the configuration of npm . it tracks the version
+       package-lock.json:  it tracks the exact version of all the dependencies.
+
+node-modules  : collection of dependencies.
+
+npx : executing the package.
+npm : install the package.
+npm : it manages the packages in your project. 
+it is the standard repo for all packages.
+
+
+
