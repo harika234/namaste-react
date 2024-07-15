@@ -29,3 +29,8 @@ it is the standard repo for all packages.
 
 
 
+
+
+episode-3................................
+npm start ===== npm run start as we have configured in package.json
+npm build != npm run build
