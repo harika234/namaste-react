@@ -34,3 +34,16 @@ it is the standard repo for all packages.
 episode-3................................
 npm start ===== npm run start as we have configured in package.json
 npm build != npm run build
+
+
+Two tyoes of Export/Import
+
+- Default Export/Import
+
+export Default Component
+import Component from "path"
+
+ - Named Export/Import
+
+ export const Component;
+ import {component} from "path"
