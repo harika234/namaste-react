@@ -47,3 +47,12 @@ import Component from "path"
 
  export const Component;
  import {component} from "path"
+
+
+
+ #React Hooks
+ 
+ Normal java script utility functions.
+-use state() - superpower ful state variables
+-use effect()
+

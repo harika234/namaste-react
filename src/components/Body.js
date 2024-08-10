@@ -1,67 +1,60 @@
 import RestaurentCard from "./RestaurentCard";
+import { useState,useEffect } from "react";
 import resList from "../utils/mockData";
+import Shimmer from "./shimmer";
+
 const Body = () => {
 
-    let listOfRestaurents = [
-        {
-            data: {
-            "id": "92292",
-            "name": "Burger King",
-            "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/11/4ee8bc77-ca9f-41bd-a0f3-511c70902b91_92292.JPG",
-            "locality": "KIIT Square",
-            "areaName": "Patia Village",
-            "costForTwo": "₹350 for two",
-            "cuisines": [
-            "Burgers",
-            "American"
-            ],
-            "avgRating": 3.8 ,
-            "deliveryTime": 17,       
-            },
-        },
+    // Local state variable- super powerful variable
+    const [listOfRestaurents, setListOfRestaurents] = useState([]);
+    
+    useEffect(()=>{
+        fetchData();
+    },[]);
 
-        {
-            data: {
-            "id": "92295",
-            "name": "Dominos King",
-            "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/11/4ee8bc77-ca9f-41bd-a0f3-511c70902b91_92292.JPG",
-            "locality": "KIIT Square",
-            "areaName": "Patia Village",
-            "costForTwo": "₹350 for two",
-            "cuisines": [
-            "Burgers",
-            "American"
-            ],
-            "avgRating": 4.5 ,
-            "deliveryTime": 17,       
-            },
-        },
-
-        
-    ];
-    return (
-      <div className="body">
-        <div className="filter" >
-            <button className="filter-btn" 
-            onClick={()=>{
-                // filter logic
-                listOfRestaurents = listOfRestaurents.filter(
-                    (res)=> res.data.avgRating > 4)
+    const fetchData = async () => {
+        try {
+            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.3532772&lng=85.8265977&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    
+            if (!data.ok) {
+                throw new Error('Network response was not ok');
             }
-            }>
-                Top Rated Restaurants</button>
+    
+            const json = await data.json();
+            console.log(json);
+            //optional chaining
+            setListOfRestaurents(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+            // Process the JSON data here
+        } catch (error) {
+            console.error("Failed to fetch data:", error);
+        }
+    };
+    
+    
+    return listOfRestaurents.length ===0 ? (
+     <Shimmer /> 
+    ) : (
+        <div className="body">
+            <div className="filter">
+                <button className="filter-btn"
+                    onClick={() => {
+                        // filter logic
+                        const filteredList = listOfRestaurents.filter(
+                            (res) => res.info.avgRating > 4);
+                        setListOfRestaurents(filteredList);
+                    }}>
+                    Top Rated Restaurants
+                </button>
+            </div>
+            <div className="res-container">
+                {
+                    listOfRestaurents.map((restraurent) => (
+                        <RestaurentCard key={restraurent.info.id} resData={restraurent} />
+                    ))
+                }
+            </div>
         </div>
-        <div className="res-container">
-            {
-                listOfRestaurents.map((restraurent) => (
-                   <RestaurentCard key={restraurent.data.id} resData={restraurent}/>
-                )) 
-            }
-            
-            
-        </div>
-      </div>
     )
-  }
+}
 
-  export default Body;
+export default Body;
