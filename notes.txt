@@ -61,3 +61,7 @@ react fibre new reconciliation algorithm to efficiently manipulate the DOM.
 virtual DOM is not making reat fast.
 react Fibre-> new reconciliation algorithm which finds out the diff between 
 2 DOM'S and updates the DOM only when required.
+
+#2 types of routing
+Client side routing
+server side routing

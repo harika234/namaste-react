@@ -2,6 +2,7 @@ import RestaurentCard from "./RestaurentCard";
 import { useState,useEffect } from "react";
 import resList from "../utils/mockData";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
 
@@ -19,7 +20,8 @@ const Body = () => {
     const fetchData = async () => {
         try {
             const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.3532772&lng=85.8265977&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-    
+
+                
             if (!data.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -76,7 +78,9 @@ const Body = () => {
             <div className="res-container">
                 {
                     filteredRestaurant.map((restraurent) => (
-                        <RestaurentCard key={restraurent.info.id} resData={restraurent} />
+                        <Link 
+                        key = {restraurent.info.id}
+                        to={"/restaurants/" + restraurent.info.id}><RestaurentCard key={restraurent.info.id} resData={restraurent} /></Link>
                     ))
                 }
             </div>
