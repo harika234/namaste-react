@@ -5,7 +5,7 @@ const User = ({name}) => {
     useEffect(() => {
         //Api calls
     },[])
-    return( <div className="user-card">
+    return( <div className="m-4 p-4 bg-gray-50 rounded-lg">
         <h2>Name: {name}</h2>
         <h3> Location : Vizag</h3>
         <h3>Contact : harika@gmail.com</h3>
